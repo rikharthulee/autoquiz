@@ -23,7 +23,7 @@ const quizQuestions = [
 
   {
     question: "How many of Henry VIII's wives were called Catherine?",
-    correctAnswer: 3,
+    correctAnswer: "3",
   },
 
   {
@@ -53,27 +53,24 @@ const quizQuestions = [
   },
 ];
 
-let currentQuestionIndex = 0; // Variable to count users score
-let userAnswers = []; // Empty array to store users answers
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let score = 0;
 
-// Asks the first question
 function askQuestion(index) {
-  let userAnswer = prompt(quizQuestions[index].question); // creates a variable and and a popup with the first question from the array
-  userAnswers.push(userAnswer); // adds the users answer to the userAnswers array
-  nextQuestion(); // Calls next function
+  let userAnswer = prompt(quizQuestions[index].question);
+  userAnswers.push(userAnswer);
+  nextQuestion();
 }
 
 function nextQuestion() {
-  currentQuestionIndex++; // add 1 to currentQ var
+  currentQuestionIndex++;
   if (currentQuestionIndex < quizQuestions.length) {
-    askQuestion(currentQuestionIndex); // Go round again, as long as there are questions left
+    askQuestion(currentQuestionIndex);
   } else {
-    checkAnswers(); // check answers!
+    checkAnswers();
   }
 }
-
-// Start the quiz
-askQuestion(currentQuestionIndex); // Sends the currentQ var to the askQuestion function
 
 function checkAnswers() {
   for (let i = 0; i < quizQuestions.length; i++) {
@@ -81,7 +78,13 @@ function checkAnswers() {
       userAnswers[i].toLowerCase() ===
       quizQuestions[i].correctAnswer.toLowerCase()
     ) {
-      console.log("Question " + (i + 1) + ": Correct!");
+      score++;
+      console.log(
+        "Question " +
+          (i + 1) +
+          ": Correct! The answer was " +
+          quizQuestions[i].correctAnswer
+      );
     } else {
       console.log(
         "Question " +
@@ -90,5 +93,10 @@ function checkAnswers() {
           quizQuestions[i].correctAnswer
       );
     }
+    console.log("Your answer: " + userAnswers[i]);
   }
+
+  console.log("Your score is: " + score + "/" + quizQuestions.length);
 }
+
+askQuestion(currentQuestionIndex);
