@@ -56,34 +56,39 @@ const quizQuestions = [
 let currentQuestionIndex = 0; // Variable to count users score
 let userAnswers = []; // Empty array to store users answers
 
+// Asks the first question
 function askQuestion(index) {
-  let userAnswer = prompt(quizQuestions[index].question);
-  userAnswers.push(userAnswer);
-  nextQuestion();
+  let userAnswer = prompt(quizQuestions[index].question); // creates a variable and and a popup with the first question from the array
+  userAnswers.push(userAnswer); // adds the users answer to the userAnswers array
+  nextQuestion(); // Calls next function
 }
 
 function nextQuestion() {
-  currentQuestionIndex++;
+  currentQuestionIndex++; // add 1 to currentQ var
   if (currentQuestionIndex < quizQuestions.length) {
-    askQuestion(currentQuestionIndex);
+    askQuestion(currentQuestionIndex); // Go round again, as long as there are questions left
   } else {
-    // End of quiz
+    checkAnswers(); // check answers!
   }
 }
 
 // Start the quiz
-askQuestion(currentQuestionIndex);
+askQuestion(currentQuestionIndex); // Sends the currentQ var to the askQuestion function
 
-/*function askQuestion(index) {
-  let userAnswer = prompt(quizQuestions[index].question); // This will display the question and wait for the user's answer
-  if (
-    userAnswer.toLocaleLowerCase() ===
-    quizQuestions[index].correctAnswer.toLocaleLowerCase()
-  ) {
-    console.log("Correct!");
-    userScore++;
-  } else {
-    console.log("Wrong!");
+function checkAnswers() {
+  for (let i = 0; i < quizQuestions.length; i++) {
+    if (
+      userAnswers[i].toLowerCase() ===
+      quizQuestions[i].correctAnswer.toLowerCase()
+    ) {
+      console.log("Question " + (i + 1) + ": Correct!");
+    } else {
+      console.log(
+        "Question " +
+          (i + 1) +
+          ": Incorrect. The correct answer was " +
+          quizQuestions[i].correctAnswer
+      );
+    }
   }
 }
-*/
