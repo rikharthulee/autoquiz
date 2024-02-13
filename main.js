@@ -53,20 +53,13 @@ const quizQuestions = [
   },
 ];
 
-let currentQuestionIndex = 0;
-let userScore = 0;
+let currentQuestionIndex = 0; // Variable to count users score
+let userAnswers = []; // Empty array to store users answers
 
 function askQuestion(index) {
-  let userAnswer = prompt(quizQuestions[index].question); // This will display the question and wait for the user's answer
-  if (
-    userAnswer.toLocaleLowerCase() ===
-    quizQuestions[index].correctAnswer.toLocaleLowerCase()
-  ) {
-    console.log("Correct!");
-    userScore++;
-  } else {
-    console.log("Wrong!");
-  }
+  let userAnswer = prompt(quizQuestions[index].question);
+  userAnswers.push(userAnswer);
+  nextQuestion();
 }
 
 function nextQuestion() {
@@ -80,3 +73,17 @@ function nextQuestion() {
 
 // Start the quiz
 askQuestion(currentQuestionIndex);
+
+/*function askQuestion(index) {
+  let userAnswer = prompt(quizQuestions[index].question); // This will display the question and wait for the user's answer
+  if (
+    userAnswer.toLocaleLowerCase() ===
+    quizQuestions[index].correctAnswer.toLocaleLowerCase()
+  ) {
+    console.log("Correct!");
+    userScore++;
+  } else {
+    console.log("Wrong!");
+  }
+}
+*/
